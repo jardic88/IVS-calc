@@ -13,10 +13,16 @@ MatematKnih.Nasobeni = function(prvni, druhe) {
 }
 
 MatematKnih.Deleni = function(prvni, druhe) {
+	if (druhe == 0) {
+		return "Chyba - dělení nulou"
+	}
 	return prvni / druhe;
 }
 
 MatematKnih.Faktorial = function(cislo) {
+	if (cislo < 0) {
+		return "Chyba - faktorial záporného čísla"
+	}
 	vysledek = 1
 	for (var i = 2; i <= cislo; i++) {
 		vysledek *= i;
@@ -36,6 +42,9 @@ MatematKnih.Mocnina = function(prvni, druhe) {
 }
 
 MatematKnih.Odmocnina = function(cislo) {
+	if (cislo < 0) {
+		return "Chyba - odmocnina záporného čísla"
+	}
 	x = [];
 	i = 0;
 	x[i] = cislo
@@ -43,9 +52,6 @@ MatematKnih.Odmocnina = function(cislo) {
 		x[i+1] = 1/2*(x[i] + (cislo/x[i]));
 		vysledek = x[i+1];
 		i++;
-		console.log(vysledek)
 	}
 	return vysledek
 }
-
-console.log(MatematKnih.Odmocnina(42))
