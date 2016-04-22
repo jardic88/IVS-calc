@@ -23,7 +23,12 @@ body{
 	background-color: #c3c3c3;
 	margin-left: 19px;
 	margin-top: 50px;
+	color: black;
+	text-align: right;
+	font-size: 40px;
+	line-height: 90px;
 }
+
 #cara{
 	width: 325px;
 	height: 5px;
