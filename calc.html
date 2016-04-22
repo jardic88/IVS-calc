@@ -4,6 +4,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Kalkulačka do předmětu IVS</title>
 	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript" src="mat_knih.js"></script>
 </head>
 <body>
 	<div id="okraj">
@@ -14,42 +15,168 @@
 			</div>
 			<div id="prvni">
 				<div id="maz">
-					<button id="ce" class="button">CE</button>
+					<button id="ce" class="button" onclick="vymaz()">CE</button>
 				</div>
 			</div>
 			<div id="druhy">
 				<div id="funkce">
-					<button id="fakt" class="button">x!</button>
-					<button id="na" class="button">x^y</button>
-					<button id="sqrt" class="button">√</button>
+					<button id="fakt" class="button" onclick="special('x!')">x!</button>
+					<button id="na" class="button" onclick="zpracovani_operaci('x^y')">x^y</button>
+					<button id="sqrt" class="button" onclick="special('√')">√</button>
 				</div>
 			</div>
 			<div id="treti">
 				<div id="operator">
-					<button id="lomeno" class="button">/</button>
-					<button id="krat" class="button">*</button>
-					<button id="minus" class="button">-</button>
-					<button id="plus" class="button">+</button>
+					<button id="lomeno" class="button" onclick="zpracovani_operaci('/')">/</button>
+					<button id="krat" class="button" onclick="zpracovani_operaci('*')">*</button>
+					<button id="minus" class="button" onclick="zpracovani_operaci('-')">-</button>
+					<button id="plus" class="button" onclick="zpracovani_operaci('+')">+</button>
 				</div>
 			</div>
 			<div id="ctvrty">
 				<div id="tlacitka">
-					<button id="7" class="button">7</button>
-					<button id="8" class="button">8</button>
-					<button id="9" class="button">9</button>
-					<button id="4" class="button">4</button>
-					<button id="5" class="button">5</button>
-					<button id="6" class="button">6</button>
-					<button id="1" class="button">1</button>
-					<button id="2" class="button">2</button>
-					<button id="3" class="button">3</button>
-					<button id="0" class="button">0</button>
-					<button id="carka" class="button">,</button>
-					<button id="rovnase" class="button">=</button>
+					<button id="7" class="button" onclick="zpracovani_cisel(7)">7</button>
+					<button id="8" class="button" onclick="zpracovani_cisel(8)">8</button>
+					<button id="9" class="button" onclick="zpracovani_cisel(9)">9</button>
+					<button id="4" class="button" onclick="zpracovani_cisel(4)">4</button>
+					<button id="5" class="button" onclick="zpracovani_cisel(5)">5</button>
+					<button id="6" class="button" onclick="zpracovani_cisel(6)">6</button>
+					<button id="1" class="button" onclick="zpracovani_cisel(1)">1</button>
+					<button id="2" class="button" onclick="zpracovani_cisel(2)">2</button>
+					<button id="3" class="button" onclick="zpracovani_cisel(3)">3</button>
+					<button id="0" class="button" onclick="zpracovani_cisel('0')">0</button>
+					<button id="carka" class="button" onclick="zpracovani_cisel('.')">,</button>
+					<button id="rovnase" class="button"  onclick="rovnase()">=</button>
 				</div>
 			</div>
 		</div>	
 	</div>
+	<script type="text/javascript">
+		document.getElementById('displej').innerHTML = '0'
+		cisla = []
+		operatory = []
+		cislo = ""
+		akce = ""
+		prvni = 0
+		druhe = 0
+		vysledek = ""
+		function zpracovani_cisel(cislice) {
+			if (cislice) {
+				cislo += cislice
+				document.getElementById('displej').innerHTML = cislo
+			}
+		}
+		function zpracovani_operaci(operace) {
+			if (operatory.length != 0) {
+				console.log(operatory)
+				akce = operatory.pop()
+				console.log(akce)
+				if (cislo) {druhe = parseFloat(cislo)}
+				else{druhe = parseFloat(cisla.pop())}
+				prvni = parseFloat(cisla.pop())
+				switch(akce) {
+				    case "+":
+				        vysledek = MatematKnih.Scitani(prvni, druhe)
+				        break;
+				    case "-":
+				        vysledek = MatematKnih.Odcitani(prvni, druhe)
+				        break;
+				    case "*":
+				        vysledek = MatematKnih.Nasobeni(prvni, druhe)
+				    case "/":
+				        vysledek = MatematKnih.Deleni(prvni, druhe)
+				        break;
+				    case "x^y":
+				        vysledek = MatematKnih.Mocnina(prvni, druhe)
+				        break;
+				    default:
+				        break;
+				}
+				cisla.push(vysledek)
+				operatory.push(operace)
+				cislo = ""
+				document.getElementById('displej').innerHTML = vysledek
+			}
+			else{
+				if (cislo) {
+					cisla.push(cislo)
+				    cislo = ""
+				}
+				operatory.push(operace)
+				
+			}
+		}
+		function special(znak){
+			if (cislo) {
+				if (znak == 'x!') {
+					vysledek = MatematKnih.Faktorial(parseFloat(cislo))
+				    cislo = ""
+				    cisla.push(vysledek)
+				    document.getElementById('displej').innerHTML = vysledek
+				}
+				else{
+					vysledek = MatematKnih.Odmocnina(parseFloat(cislo))
+					cislo = ""
+					cisla.push(vysledek)
+					document.getElementById('displej').innerHTML = vysledek
+				}
+			}
+			else{
+				if (znak == 'x!') {
+					prvni = cisla.pop()
+					vysledek = MatematKnih.Faktorial(parseFloat(prvni))
+				    cisla.push(vysledek)
+				    document.getElementById('displej').innerHTML = vysledek
+				}
+				else{
+					prvni = cisla.pop()
+					vysledek = MatematKnih.Odmocnina(parseFloat(prvni))
+					cisla.push(vysledek)
+					document.getElementById('displej').innerHTML = vysledek
+				}
+			}
+		}
+		function rovnase(){
+			if (operatory.length != 0) {
+				akce = operatory.pop()
+				if (cislo) {druhe = parseFloat(cislo)}
+				else{druhe = parseFloat(cisla.pop())}
+				prvni = parseFloat(cisla.pop())
+				switch(akce) {
+				    case "+":
+				        vysledek = MatematKnih.Scitani(prvni, druhe)
+				        break;
+				    case "-":
+				        vysledek = MatematKnih.Odcitani(prvni, druhe)
+				        break;
+				    case "*":
+				        vysledek = MatematKnih.Nasobeni(prvni, druhe)
+				        break;
+				    case "/":
+				        vysledek = MatematKnih.Deleni(prvni, druhe)
+				        break;
+				    case "x^y":
+				        vysledek = MatematKnih.Mocnina(prvni, druhe)
+				        break;
+				    default:
+				        break;
+				}
+				cisla.push(vysledek)
+				cislo = ""
+				document.getElementById('displej').innerHTML = vysledek
+			}
+		}
+		function vymaz() {
+			document.getElementById('displej').innerHTML = '0'
+			cisla = ["0"]
+			operatory = []
+			cislo = ""
+			akce = ""
+			prvni = 0
+			druhe = 0
+			vysledek = ""
+		}
+	</script>
 </body>
 
 

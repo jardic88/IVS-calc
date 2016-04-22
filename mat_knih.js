@@ -35,10 +35,20 @@ MatematKnih.Mocnina = function(prvni, druhe) {
 		return 1
 	}
 	vysledek = prvni
-	for (var i = 1; i < druhe; i++) {
-		vysledek *= prvni
+	if (druhe < 0) {
+		for (var i = 0; i <= druhe*(-1); i++) {
+			vysledek *= 1/prvni
+		}
+		return vysledek
+
 	}
-	return vysledek
+	else{
+		for (var i = 1; i < druhe; i++) {
+			vysledek *= prvni
+		}
+		return vysledek
+	}
+
 }
 
 MatematKnih.Odmocnina = function(cislo) {
