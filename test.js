@@ -13,3 +13,11 @@ QUnit.test( "Test Odcitanie", function( assert ) {
    assert.strictEqual(MatematKnih.Odcitani(-90, -10), -80, '[-90 -(-10) = -80]  PASS');
    assert.strictEqual(MatematKnih.Odcitani(5.75, 2.75), 3, '[5.75 - 2.75 = 3]  PASS');
 });
+
+QUnit.test( "Test Nasobenie", function( assert ) {
+   assert.strictEqual(MatematKnih.Nasobeni(5, 6), 30, '[5 * 6 = 30]  PASS');
+   assert.strictEqual(MatematKnih.Nasobeni(10, 0), 0, '[10 * 0 = 0]  PASS');
+   assert.strictEqual(MatematKnih.Nasobeni(-5, 3), -15, '[-5 * 3 = -15]  PASS');
+   assert.strictEqual(MatematKnih.Nasobeni(-4, -4), 16, '[-4 *(-4) = 16]  PASS');
+   assert.strictEqual(MatematKnih.Nasobeni(2.562, 11), 28.182, '[2.5 * 11 = 28.182]  PASS');
+});
