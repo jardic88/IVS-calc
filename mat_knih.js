@@ -39,14 +39,19 @@ MatematKnih.Mocnina = function(prvni, druhe) {
 		for (var i = 0; i <= druhe*(-1); i++) {
 			vysledek *= 1/prvni
 		}
-		return vysledek
-
+		if (prvni < 0)
+			return -1*vysledek
+		else
+			return vysledek	
 	}
 	else{
 		for (var i = 1; i < druhe; i++) {
 			vysledek *= prvni
 		}
-		return vysledek
+		if (prvni < 0)
+			return -1*vysledek
+		else
+			return vysledek
 	}
 
 }
@@ -55,6 +60,10 @@ MatematKnih.Odmocnina = function(cislo) {
 	if (cislo < 0) {
 		return "Chyba - odmocnina záporného čísla"
 	}
+	else if (cislo == 0) {
+		return 0
+	}
+	
 	x = [];
 	i = 0;
 	x[i] = cislo
