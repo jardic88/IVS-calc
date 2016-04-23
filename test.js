@@ -46,3 +46,11 @@ QUnit.test( "Test Mocnina", function( assert ) {
    assert.strictEqual(MatematKnih.Mocnina(2, -4), 0.0625, '[2^-4 = 0.0625]  PASS');
    assert.strictEqual(MatematKnih.Mocnina(-2, -2), -0.25, '[-2^-2 = -0.25]  PASS');
 });
+
+QUnit.test( "Test Odmocnina", function( assert ) {
+   assert.strictEqual(MatematKnih.Odmocnina(0), 0, '[sqrt(0) = 0]  PASS');
+   assert.strictEqual(MatematKnih.Odmocnina(1), 1, '[sqrt(1) = 1]  PASS');
+   assert.strictEqual(MatematKnih.Odmocnina(4), 2, '[sqrt(4) = 4]  PASS');
+   assert.strictEqual(MatematKnih.Odmocnina(4900), 70, '[sqrt(4900) = 70]  PASS');
+   assert.strictEqual(MatematKnih.Odmocnina(17.4), 4.171330722922842, '[sqrt(17.4) = 4.171330722922842]  PASS'); 
+});
