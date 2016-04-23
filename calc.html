@@ -60,47 +60,76 @@
 		prvni = 0
 		druhe = 0
 		vysledek = ""
+		tecka = 0
 		function zpracovani_cisel(cislice) {
-			if (cislice) {
+			if (cislice == '.' &&  tecka != 1) {
+				if (cislo.length == 0) {
+					cislo += '0'
+					cislo += cislice
+					tecka = 1
+					document.getElementById('displej').innerHTML = cislo
+				}
+				else{
+					cislo += cislice
+					tecka = 1
+					document.getElementById('displej').innerHTML = cislo
+				}
+			}
+			if (cislice != '.') {
 				cislo += cislice
 				document.getElementById('displej').innerHTML = cislo
 			}
 		}
 		function zpracovani_operaci(operace) {
+			console.log(operatory)
 			if (operatory.length != 0) {
-				console.log(operatory)
-				akce = operatory.pop()
-				console.log(akce)
-				if (cislo) {druhe = parseFloat(cislo)}
-				else{druhe = parseFloat(cisla.pop())}
-				prvni = parseFloat(cisla.pop())
-				switch(akce) {
-				    case "+":
-				        vysledek = MatematKnih.Scitani(prvni, druhe)
-				        break;
-				    case "-":
-				        vysledek = MatematKnih.Odcitani(prvni, druhe)
-				        break;
-				    case "*":
-				        vysledek = MatematKnih.Nasobeni(prvni, druhe)
-				    case "/":
-				        vysledek = MatematKnih.Deleni(prvni, druhe)
-				        break;
-				    case "x^y":
-				        vysledek = MatematKnih.Mocnina(prvni, druhe)
-				        break;
-				    default:
-				        break;
+				if ((operace == '*' || operace == '/' || operace == 'x^y') && (operatory[operatory.length - 1] == '+' || operatory[operatory.length - 1] == '-')) {
+					cisla.push(cislo)
+					operatory.push(operace)
+					cislo = ""
+					tecka = 0
 				}
-				cisla.push(vysledek)
-				operatory.push(operace)
-				cislo = ""
-				document.getElementById('displej').innerHTML = vysledek
+				else{
+					if (operatory.length != 0) {
+						rovnase()
+					}
+					akce = operatory.pop()
+					if (cislo) {druhe = parseFloat(cislo)}
+					else{druhe = parseFloat(cisla.pop())}
+					prvni = parseFloat(cisla.pop())
+					switch(akce) {
+					    case "+":
+					        vysledek = MatematKnih.Scitani(prvni, druhe)
+					        break;
+					    case "-":
+					        vysledek = MatematKnih.Odcitani(prvni, druhe)
+					        break;
+					    case "*":
+					        vysledek = MatematKnih.Nasobeni(prvni, druhe)
+					        break;
+					    case "/":
+					        vysledek = MatematKnih.Deleni(prvni, druhe)
+					        break;
+					    case "x^y":
+					        vysledek = MatematKnih.Mocnina(prvni, druhe)
+					        break;
+					    default:
+					        break;
+					}
+					cisla.push(vysledek)
+					if (operace) {
+						operatory.push(operace)
+					}
+					cislo = ""
+					tecka = 0
+					document.getElementById('displej').innerHTML = vysledek
+				}
 			}
 			else{
 				if (cislo) {
 					cisla.push(cislo)
 				    cislo = ""
+				    tecka = 0
 				}
 				operatory.push(operace)
 				
@@ -110,31 +139,24 @@
 			if (cislo) {
 				if (znak == 'x!') {
 					vysledek = MatematKnih.Faktorial(parseFloat(cislo))
-				    cislo = ""
-				    cisla.push(vysledek)
-				    document.getElementById('displej').innerHTML = vysledek
 				}
 				else{
 					vysledek = MatematKnih.Odmocnina(parseFloat(cislo))
-					cislo = ""
-					cisla.push(vysledek)
-					document.getElementById('displej').innerHTML = vysledek
 				}
+				cislo = ""
+				tecka = 0
 			}
 			else{
+				prvni = cisla.pop()
 				if (znak == 'x!') {
-					prvni = cisla.pop()
 					vysledek = MatematKnih.Faktorial(parseFloat(prvni))
-				    cisla.push(vysledek)
-				    document.getElementById('displej').innerHTML = vysledek
 				}
 				else{
-					prvni = cisla.pop()
 					vysledek = MatematKnih.Odmocnina(parseFloat(prvni))
-					cisla.push(vysledek)
-					document.getElementById('displej').innerHTML = vysledek
 				}
 			}
+			cisla.push(vysledek)
+			document.getElementById('displej').innerHTML = vysledek
 		}
 		function rovnase(){
 			if (operatory.length != 0) {
@@ -163,7 +185,11 @@
 				}
 				cisla.push(vysledek)
 				cislo = ""
+				tecka = 0
 				document.getElementById('displej').innerHTML = vysledek
+			}
+			if (operatory.length != 0) {
+				rovnase()
 			}
 		}
 		function vymaz() {
@@ -175,6 +201,7 @@
 			prvni = 0
 			druhe = 0
 			vysledek = ""
+			tecka = 0
 		}
 	</script>
 </body>
