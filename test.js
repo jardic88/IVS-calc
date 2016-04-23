@@ -30,3 +30,19 @@ QUnit.test( "Test Delenie", function( assert ) {
    assert.strictEqual(MatematKnih.Deleni(0, 10), 0, '[0 / 10 = 0]  PASS');
    assert.strictEqual(MatematKnih.Deleni(15.555, 3), 5.185, '[15.555 / 3 = 5.185]  PASS');
 });
+
+QUnit.test( "Test Faktorial", function( assert ) {
+   assert.strictEqual(MatematKnih.Faktorial(0), 1, '[0! = 1]  PASS');
+   assert.strictEqual(MatematKnih.Faktorial(1), 1, '[1! = 1]  PASS');
+   assert.strictEqual(MatematKnih.Faktorial(5), 120, '[5! = 120]  PASS');
+   assert.strictEqual(MatematKnih.Faktorial(8), 40320, '[8! = 40320]  PASS');
+   assert.strictEqual(MatematKnih.Faktorial(15), 1307674368000, '[15! = 1307674368000]  PASS'); 
+});
+
+QUnit.test( "Test Mocnina", function( assert ) {
+   assert.strictEqual(MatematKnih.Mocnina(7, 0), 1, '[7^0 = 1]  PASS');
+   assert.strictEqual(MatematKnih.Mocnina(3, 2), 9, '[3^2 = 1]  PASS');
+   assert.strictEqual(MatematKnih.Mocnina(-2, 4), -16, '[-2^4 = 16]  PASS');
+   assert.strictEqual(MatematKnih.Mocnina(2, -4), 0.0625, '[2^-4 = 0.0625]  PASS');
+   assert.strictEqual(MatematKnih.Mocnina(-2, -2), -0.25, '[-2^-2 = -0.25]  PASS');
+});
