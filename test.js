@@ -21,3 +21,12 @@ QUnit.test( "Test Nasobenie", function( assert ) {
    assert.strictEqual(MatematKnih.Nasobeni(-4, -4), 16, '[-4 *(-4) = 16]  PASS');
    assert.strictEqual(MatematKnih.Nasobeni(2.562, 11), 28.182, '[2.5 * 11 = 28.182]  PASS');
 });
+
+QUnit.test( "Test Delenie", function( assert ) {
+   assert.strictEqual(MatematKnih.Deleni(50, 5), 10, '[50 / 5 = 10]  PASS');
+   assert.strictEqual(MatematKnih.Deleni(24, 5), 4.8, '[24 / 5 = 4.8]  PASS');
+   assert.strictEqual(MatematKnih.Deleni(-15, 4), -3.75, '[-15 / 4 = -3.75]  PASS');
+   assert.strictEqual(MatematKnih.Deleni(-8, -2), 4, '[-8 /(-2) = 4]  PASS');
+   assert.strictEqual(MatematKnih.Deleni(0, 10), 0, '[0 / 10 = 0]  PASS');
+   assert.strictEqual(MatematKnih.Deleni(15.555, 3), 5.185, '[15.555 / 3 = 5.185]  PASS');
+});
