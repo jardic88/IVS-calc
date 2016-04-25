@@ -67,21 +67,20 @@
 					cislo += '0'
 					cislo += cislice
 					tecka = 1
-					document.getElementById('displej').innerHTML = cislo
+					document.getElementById('displej').innerHTML = cislo.substring(0, 16)
 				}
 				else{
 					cislo += cislice
 					tecka = 1
-					document.getElementById('displej').innerHTML = cislo
+					document.getElementById('displej').innerHTML = cislo.substring(0, 16)
 				}
 			}
 			if (cislice != '.') {
 				cislo += cislice
-				document.getElementById('displej').innerHTML = cislo
+				document.getElementById('displej').innerHTML = cislo.substring(0, 16)
 			}
 		}
 		function zpracovani_operaci(operace) {
-			console.log(operatory)
 			if (operatory.length != 0) {
 				if ((operace == '*' || operace == '/' || operace == 'x^y') && (operatory[operatory.length - 1] == '+' || operatory[operatory.length - 1] == '-')) {
 					cisla.push(cislo)
@@ -122,7 +121,8 @@
 					}
 					cislo = ""
 					tecka = 0
-					document.getElementById('displej').innerHTML = vysledek
+					vysledek = vysledek.toString()
+					document.getElementById('displej').innerHTML = vysledek.substring(0, 16)
 				}
 			}
 			else{
@@ -156,7 +156,8 @@
 				}
 			}
 			cisla.push(vysledek)
-			document.getElementById('displej').innerHTML = vysledek
+			vysledek = vysledek.toString()
+			document.getElementById('displej').innerHTML = vysledek.substring(0, 16)
 		}
 		function rovnase(){
 			if (operatory.length != 0) {
@@ -186,7 +187,8 @@
 				cisla.push(vysledek)
 				cislo = ""
 				tecka = 0
-				document.getElementById('displej').innerHTML = vysledek
+				vysledek = vysledek.toString()
+				document.getElementById('displej').innerHTML = vysledek.substring(0, 16)
 			}
 			if (operatory.length != 0) {
 				rovnase()
