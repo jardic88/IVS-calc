@@ -30,7 +30,6 @@ var MatematKnih = {};
 ///@param {float} sčítanec
 ///@return součet
 ///
-
 MatematKnih.Scitani = function(prvni, druhe) {
 	return prvni + druhe;
 }
