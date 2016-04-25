@@ -81,7 +81,7 @@ MatematKnih.Faktorial = function(cislo) {
 	/**
 	*Vrátí NaN při zadání necelého čísla
 	*/
-	if  (cislo.toString().includes('.')) {
+	if  (!Number.isInteger(cislo)) {
 		return "NaN"
 	}
 	/**Výchozí hodnota je 1*/
@@ -108,7 +108,7 @@ MatematKnih.Mocnina = function(prvni, druhe) {
 	/**
 	*Vrátí NaN při zadání necelého exponentu
 	*/
-	if  (druhe.toString().includes('.')) {
+	if  (!Number.isInteger(druhe)) {
 		return "NaN"
 	}
 	/**Nastaví základ mocniny jako výsledek*/
